@@ -33,8 +33,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        fragmentTransaction {
-            add(R.id.fragmentContainer, TagsFragment.getInstance(), null)
+        if (savedInstanceState == null) {
+            fragmentTransaction {
+                add(R.id.fragmentContainer, TagsFragment.getInstance(), null)
+            }
         }
         setSupportActionBar(toolbar)
     }

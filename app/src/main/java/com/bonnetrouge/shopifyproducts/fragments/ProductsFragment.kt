@@ -26,6 +26,7 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        savedInstanceState?.let { productTag = savedInstanceState.get(PRODUCT_TAG) as String }
         with (recyclerView) {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             this.adapter = this@ProductsFragment.adapter
@@ -42,7 +43,14 @@ class ProductsFragment : Fragment() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString(PRODUCT_TAG, productTag)
+        super.onSaveInstanceState(outState)
+    }
+
     companion object {
+        const val PRODUCT_TAG = "product_tag"
+
         fun getInstance(tag: String) = ProductsFragment().apply { productTag = tag }
     }
 }
